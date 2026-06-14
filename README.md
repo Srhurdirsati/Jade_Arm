@@ -36,6 +36,58 @@ This project was meant to be am AI integrated camera with audio arm which has vi
 | Arduino Nano | Servo Control | 1 | 15.80 | https://amzn.in/d/0hf3xZE3 | Amazon |
 | Raspberry Pi 4B 2GB RAM | Controller Board | 1 | 64.99 | https://robu.in/product/raspberry-pi-4-model-b-with-2-gb-ram | Robu.in |
 
+
+## Wiring Diagram 
+
+
+```mermaid
+flowchart LR
+
+    PSU["12V 25A Power Supply"]
+
+    RPI["Raspberry Pi 4 (4GB)"]
+    NANO["Arduino Nano"]
+
+    CAM["USB Webcam"]
+    SPK["10W Speaker"]
+
+    BTS1["BTS7960 #1<br/>Shoulder"]
+    BTS2["BTS7960 #2<br/>Elbow"]
+    BTS3["BTS7960 #3<br/>Base Rotation"]
+
+    M1["Rhino Encoder Motor<br/>Shoulder"]
+    M2["Rhino Encoder Motor<br/>Elbow"]
+    M3["Rhino Encoder Motor<br/>Base"]
+
+    SERVO["DS3218 Servo<br/>Claw"]
+
+    PSU --> BTS1
+    PSU --> BTS2
+    PSU --> BTS3
+
+    PSU --> SERVO
+
+    RPI <-->|USB| CAM
+    RPI --> SPK
+
+    RPI <-->|Serial USB| NANO
+
+    NANO --> BTS1
+    NANO --> BTS2
+    NANO --> BTS3
+
+    BTS1 --> M1
+    BTS2 --> M2
+    BTS3 --> M3
+
+    NANO --> SERVO
+
+    M1 -. Encoder A/B .-> NANO
+    M2 -. Encoder A/B .-> NANO
+    M3 -. Encoder A/B .-> NANO
+
+```
+
 ## Images
 
 
